@@ -1,0 +1,82 @@
+/*
+Covid 19 Data Exploration 
+Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types
+*/
+
+Select *
+From PortfolioProject..CovidDeaths
+WHERE continent is not null
+order by 3,4
+
+
+-- Data to work with
+
+Select Location, date, total_cases, new_cases, total_deaths, population
+From PortfolioProject..CovidDeaths
+Where continent is not null 
+order by 1,2
+
+-- How many people in the States got infected and what's the percentage that died?
+
+SELECT location, date, total_cases, total_deaths,(total_deaths/total_cases)*100 as DeathPercentage
+FROM PortfolioProject ..CovidDeaths
+WHERE LOCATION like '%states%'
+ORDER BY 1,2
+
+-- How many people got COVID in the States? 
+
+SELECT location, date, population, total_cases, (total_cases/population)*100 as PercentPopulationInfected
+FROM PortfolioProject ..CovidDeaths
+WHERE LOCATION like '%states%'
+ORDER BY 1,2
+
+-- Which countries have had more infections compared to the population?
+
+SELECT location, population, MAX(total_cases) as HighestInfectionCount, MAX((total_cases/population))*100 as PercentPopulationInfected
+FROM PortfolioProject..CovidDeaths
+--WHERE location LIKE '%states%'
+GROUP BY location, population
+ORDER BY PercentPopulationInfected DESC
+
+--Which countries have had more deaths?
+
+SELECT location, MAX(cast(total_deaths AS int)) AS TotalDeathCount
+FROM PortfolioProject..CovidDeaths
+WHERE continent is not null
+GROUP BY Location
+ORDER BY TotalDeathCount DESC
+
+-- How many people by CONTINENT	have died?
+
+SELECT continent, MAX(cast(Total_deaths as int)) as TotalDeathCount
+FROM PortfolioProject..CovidDeaths
+WHERE continent is not null
+GROUP BY continent
+ORDER BY TotalDeathCount DESC
+
+-- How many people have been infected vs how many deaths have been? WORLDWIDE
+
+SELECT SUM(new_cases) as total_cases, SUM(cast(new_deaths as int)) AS total_deaths, SUM(cast(new_deaths as int))/SUM(New_Cases)*100 as DeathPercentage
+FROM PortfolioProject..CovidDeaths
+WHERE continent is not null
+ORDER BY 1,2
+
+-- Total amount of population worldwide that has been vaccinated?
+
+SELECT * 
+FROM PortfolioProject..CovidVaccinations dea	
+JOIN PortfolioProject..CovidVaccinations vac
+	ON dea.location = vac.location
+	AND dea.date = vac.date
+
+-- How many people have gotten vaccinated over the days by location?
+
+SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
+, SUM(Cast(vac.new_vaccinations as int)) OVER (Partition by dea.location ORDER BY dea.location, dea.date) as PeopleVaccinatedperday
+,(PeopleVaccinatedperday/population)*100 
+FROM PortfolioProject..CovidDeaths dea
+JOIN PortfolioProject..CovidVaccinations vac
+	ON dea.location = vac.location
+	AND dea.date = vac.date
+WHERE dea.continent is not null
+ORDER BY 2,3
