@@ -12,23 +12,17 @@ I will be stating situations as a dvd rental company, from looking up customers,
 
 -- Send a promotional email to our current customers
 
-SELECT * FROM customer
-
 SELECT first_name, last_name, email
 FROM customer
 ORDER BY 2,1
 
 -- What type of ratings do we currently have on our movies?
 
-SELECT * FROM film
-
 SELECT DISTINCT rating
 FROM film
 ORDER BY rating
 
 -- Send a mail to a customer called Nancy Thomas that forgot their wallet at the store
-
-SELECT * FROM customer
 
 SELECT email
 FROM customer
@@ -71,6 +65,8 @@ ORDER BY amount
 
 SELECT count(DISTINCT(district))
 FROM address
+
+-- Which districts are our customers from?
 
 SELECT DISTINCT (district)
 FROM address
