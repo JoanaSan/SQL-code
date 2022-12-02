@@ -4,12 +4,11 @@ SQL queries on PostgreSQL - Topic: DVD rentals
 
 Basic queries such as: select, where, order by, limit, group by, date, having
 
+Tables: actor, address, category, city, country, customer, film, film_actor, film_category, city,
+country, customer, film, film_actor, film_category, inventory, language, payment, rental, staff, store
+
+I will be stating situations as a dvd rental company, from looking up customers, inventory, costs, etc. 
 */
-
--- Tables: actor, address, category, city, country, customer, film, film_actor, film_category, city,
--- country, customer, film, film_actor, film_category, inventory, language, payment, rental, staff, store
-
--- I will be stating situations as a dvd rental company, from looking up customers, inventory, costs, etc. 
 
 -- Send a promotional email to our current customers
 
