@@ -142,3 +142,26 @@ SELECT customer_id, COUNT(amount)
 FROM payment
 GROUP BY customer_id
 HAVING COUNT(amount) >= 40
+
+-- Customer IDs who have spent at least $110 with the staff member with ID 2
+
+SELECT customer_id, staff_id, SUM(amount)
+FROM payment
+GROUP BY customer_id, staff_id
+HAVING NOT staff_id = 1
+AND SUM(amount) >= 110
+ORDER BY SUM(amount)
+
+-- How many films begin with the letter J?
+
+SELECT COUNT(title) FROM film
+WHERE title ILIKE 'j%'
+
+-- What customer has the highest customerID number whose name starts with an 'E' and has an address ID lower than 500?
+
+SELECT customer_id, first_name, last_name, address_id
+FROM customer
+WHERE first_name ILIKE 'e%'
+AND address_id < 500
+ORDER BY customer_id DESC
+LIMIT 1
