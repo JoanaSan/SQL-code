@@ -1,7 +1,7 @@
 /*
 SQL queries on PostgreSQL - Topic: DVD rentals
 
-Queries such as: JOINS, GROUP BY.
+Queries such as: JOINS, GROUP BY and timestamps.
 
 Tables: actor, address, category, city, country, customer, film, film_actor, film_category, city,
 country, customer, film, film_actor, film_category, inventory, language, payment, rental, staff, store
@@ -79,3 +79,19 @@ ON city.country_id = country.country_id
 GROUP BY country.country, city.country_id
 ORDER BY 2 DESC
 LIMIT 10
+
+-- Payment date organized on European standard
+
+SELECT TO_CHAR(payment_date, 'DD-MM-YYYY')
+FROM payment
+
+-- During which months did payments occur? (With the full written month)
+
+SELECT DISTINCT(TO_CHAR(payment_date, 'Month'))
+FROM payment
+
+-- How many payments occured on a Monday?
+
+SELECT COUNT(*)
+FROM payment
+WHERE EXTRACT(dow FROM payment_date) = 1
