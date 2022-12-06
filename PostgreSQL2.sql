@@ -10,9 +10,6 @@ I will be stating situations as a dvd rental company, from looking up customers,
 */
 
 
-
-
-
 -- Emails of the customer who live in California
 
 SELECT email, district
