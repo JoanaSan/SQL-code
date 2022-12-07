@@ -18,3 +18,16 @@ SELECT NOW() --Show the current time stamp
 SELECT TIMEOFDAY() -- Show the current time stamp as a string(easier to read)
 SELECT CURRENT_TIME, CURRENT_DATE -- Show the current time and the current_date
 EXTRACT(YEAR FROM date_col) -- Extract YEAR of a date value
+EXTRACT(YEAR FROM date_col) -- Extract the current year of the column
+AGE(date_col) -- Calculates the age of the timestamp when you query it
+TO_CHAR(column_name) --- Converts the column to character
+TO_CHAR(date_col, 'mm-dd-yyyy') -- Formats the date to text
+-- YEAR, MONTH, DAY, QUARTER
+|| CONCAT -- Combines two columns
+UPPER -- Uppercases the result
+LOWER -- Lowercases the result
+SUBQUERY -- A query nested inside a larger query. The subquery runs first.
+EXIST -- It's used to test for the existance of any record in any subquery
+SELF-JOIN -- To join a table with itself. A join of two copies of the same table. No special keywords. Uses alias.
+
+
