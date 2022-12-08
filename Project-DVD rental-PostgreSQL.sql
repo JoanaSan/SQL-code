@@ -190,7 +190,7 @@ ON city.country_id = country.country_id
 WHERE country.country ILIKE 'united states'
 ORDER BY 1
 
--- From how many districts are our customers from?
+** -- From how many districts are our customers from?
 
 SELECT address.district, COUNT(district)
 FROM customer
@@ -207,7 +207,8 @@ INNER JOIN country
 ON city.country_id = country.country_id
 GROUP BY country.country, city.country_id
 
--- The top 10 countries where our customers are from
+** -- The top 10 countries where our customers are from
+
 SELECT country.country, count(city.country_id)
 FROM city
 INNER JOIN country
