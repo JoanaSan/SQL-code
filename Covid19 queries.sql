@@ -5,7 +5,6 @@ Goal: To Analyse the Covid 19 in United States, Mexico and Sweden and see how di
 Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types
 */
 
-SELECT * FROM covidvaccinations
 
 SELECT *
 FROM ProjectPortfolio.dbo.CovidDeaths
